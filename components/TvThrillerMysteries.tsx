@@ -7,7 +7,7 @@ import { fetchThrillerMysteryMovies } from "@/libs/tdmbs";
 
 type Tv = {
   id: number;
-  name: string;
+  name: string; //title 아님
   poster_path: string;
 };
 
@@ -28,7 +28,7 @@ export default function TvThrillerMysteries() {
   }, []);
 
   return (
-    <section className="px-2 py-1 flex flex-col gap-2 mb-8">
+    <section className="px-2 py-1 flex flex-col gap-2">
       <SectionTitle title="TV Thrillers & Mysteries" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
@@ -38,7 +38,7 @@ export default function TvThrillerMysteries() {
           .map((movie) => (
             <div
               key={movie.id}
-              className="relative w-[154px] h-[251px] flex-shrink-0 group"
+              className="relative w-[103px] h-[161px] flex-shrink-0 group"
             >
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

@@ -28,7 +28,7 @@ export default function NewReleases() {
   }, []);
 
   return (
-    <section className="px-2 py-1 flex flex-col gap-2 mb-8">
+    <section className="px-2 py-1 flex flex-col gap-2">
       <SectionTitle title="New Releases" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">

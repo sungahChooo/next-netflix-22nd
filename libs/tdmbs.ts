@@ -1,6 +1,7 @@
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
+//TMDBMovie 타입 정의 추후 사용을 위해 export
 export type TMDBMovie = {
   id: number;
   title: string;
@@ -9,6 +10,20 @@ export type TMDBMovie = {
   overview: string;
   release_date?: string;
 };
+
+//US tv shows 부분
+export async function fetchUSTVShows(
+  language = "en-US",
+  with_origin_country = "US",
+  page = 1
+) {
+  const res = await fetch(
+    `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=${language}&sort_by=popularity.desc&with_origin_country=${with_origin_country}&page=${page}`,
+    { next: { revalidate: 3600 } }
+  );
+  const data = await res.json();
+  return data.results;
+}
 
 //TV Thriller Mysteries 부분
 //Tv 장르에는 Thriller 장르 코드가 없음
@@ -24,7 +39,6 @@ export async function fetchThrillerMysteryMovies(
   );
   const data = await res.json();
   const tvShows = data.results.slice(0, 5); // 상위 5개
-  console.log("Fetched Thriller Mystery TV Shows:", tvShows);
   return tvShows;
 }
 //New Releases 부분
