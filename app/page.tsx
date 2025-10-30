@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
+import Navbar from "@/components/Navbar"
 
 export default function Page() {
     return (
@@ -9,6 +10,9 @@ export default function Page() {
             </div>
             <div className="w-[390px]">
                 <Banner />
+            </div>
+            <div>
+                <Navbar />
             </div>
         </main>
     );
