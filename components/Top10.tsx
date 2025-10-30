@@ -15,7 +15,7 @@ export default function Top10() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const getPopularMovies = async () => {
+    const loadMovies = async () => {
       try {
         const movieData = await fetchTop10Movies();
         setMovies(movieData);
@@ -24,7 +24,7 @@ export default function Top10() {
       }
     };
 
-    getPopularMovies();
+    loadMovies();
   }, []);
 
   return (

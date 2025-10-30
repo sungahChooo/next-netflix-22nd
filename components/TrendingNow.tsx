@@ -15,7 +15,7 @@ export default function TrendingNow() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const getPopularMovies = async () => {
+    const loadMovies = async () => {
       try {
         const movieData = await fetchTrendingMovies();
         setMovies(movieData);
@@ -24,7 +24,7 @@ export default function TrendingNow() {
       }
     };
 
-    getPopularMovies();
+    loadMovies();
   }, []);
 
   return (
