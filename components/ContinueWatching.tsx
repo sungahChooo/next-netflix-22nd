@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { fetchMovieById } from "@/libs/tdmbs";
 import Image from "next/image";
+import SectionTitle from "@/components/SectionTitle";
 
 type Movie = {
   id: number;
@@ -26,24 +27,22 @@ export default function ContinueWatching() {
   }, []);
 
   return (
-    <section className="px-2 py-8">
-      <div className="text-xl font-semibold w-[350px] text-white">
-        Continue Watching for Emenalo
-      </div>
+    <section className="px-2 py-2 flex flex-col gap-2">
+      <SectionTitle title="Continue Watching for Emenalo" />
 
-      <div className="flex scrollbar-hide gap-1">
+      <div className="flex scrollbar-hide gap-2 overflow-x-scroll overflow-y-hidden bg-black scrollbar-custom">
         {movies.map((movie) => (
-          <div key={movie.id} className="relative group">
+          <div key={movie.id} className="flex-shrink-0 group relative">
             <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
               width={103}
               height={177}
-              className="rounded-xs transition-transform duration-200 group-hover:scale-105 "
+              className="rounded-xs transition-transform duration-200 group-hover:scale-105"
             />
+            {/* 진행률 표시*/}
             <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
-              <div className="h-1 bg-red-500" style={{ width: "45%" }} />
-              {/* 진행률 예시 */}
+              <div className="h-1 bg-red-500" style={{ width: "70%" }} />
             </div>
           </div>
         ))}

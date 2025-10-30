@@ -1,6 +1,15 @@
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
+export type TMDBMovie = {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  overview: string;
+  release_date?: string;
+};
+
 export async function fetchPopularMovies(language = "ko-KR", page = 1) {
   const res = await fetch(
     `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${language}&page=${page}`,
@@ -13,7 +22,7 @@ export async function fetchPopularMovies(language = "ko-KR", page = 1) {
     throw new Error("Failed to fetch movies");
   }
 
-  const data = await res.json();
+  const data = await res.json(); //응답 받은 json 저장
   return data.results;
 }
 

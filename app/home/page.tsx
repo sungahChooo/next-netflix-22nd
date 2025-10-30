@@ -17,7 +17,8 @@ export default async function Home() {
         <header className="h-16 bg-gray-800 text-white flex items-center justify-center">
           헤더영역
         </header>
-        <main className="flex-1 overflow-y-auto text-white">배너 영역</main>
+        <div className="flex overflow-y-auto text-white">배너 영역</div>
+
         <ContinueWataching />
         <Popular />
         <TrendingNow />
