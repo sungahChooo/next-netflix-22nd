@@ -13,7 +13,7 @@ function posterUrl(path?: string, size: string = "w342") {
     return path ? `${IMG_BASE}/${size}${path}` : "";
 }
 
-//배너용 이미지 export함수
+//배너용 이미지 export햠수
 export async function getHeroBannerImage() {
     const data = await fetcher<any>("/movie/popular", {
         language: "ko-KR",
@@ -22,7 +22,7 @@ export async function getHeroBannerImage() {
     });
     const first = data.results?.[0];
     return {
-        backdrop: backdropUrl(first?.backdrop_path, "w780"),
+        backdrop: backdropUrl(first?.backdropPath, "w780"),
     };
 }
 
