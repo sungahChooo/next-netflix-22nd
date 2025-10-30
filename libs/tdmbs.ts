@@ -209,3 +209,12 @@ export async function fetchMovieById(id: number, language = "en-US") {
   if (!res.ok) throw new Error("Failed to fetch movie details");
   return res.json();
 }
+
+//tv 포스터 가져오기
+export async function fetchTvById(id: number, language = "en-US") {
+  const res = await fetch(
+    `${BASE_URL}/tv/${id}?api_key=${API_KEY}&language=${language}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch movie details");
+  return res.json();
+}

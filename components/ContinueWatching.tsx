@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { fetchMovieById } from "@/libs/tdmbs";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
+import { watchHistory } from "@/data/watchHistory";
 
 type Movie = {
   id: number;
   title: string;
   poster_path: string;
 };
-
+// 사용자 이름 가져오기 (더미 데이터 기준)
+const userName = watchHistory[0]?.userName || "User";
 const MOCK_WATCHING_IDS = [550, 299534, 155, 597, 681];
 
 export default function ContinueWatching() {
@@ -28,7 +30,7 @@ export default function ContinueWatching() {
 
   return (
     <section className="px-2 py-2 flex flex-col gap-2">
-      <SectionTitle title="Continue Watching for Emenalo" />
+      <SectionTitle title={`Continue Watching for ${userName}`} />
 
       <div className="flex scrollbar-hide gap-2  overflow-hidden bg-black scrollbar-custom">
         {movies
