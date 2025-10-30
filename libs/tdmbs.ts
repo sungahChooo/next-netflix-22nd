@@ -10,6 +10,23 @@ export type TMDBMovie = {
   release_date?: string;
 };
 
+//TV Thriller Mysteries 부분
+//Tv 장르에는 Thriller 장르 코드가 없음
+//Mystery 장르코드인 9648만 사용
+export async function fetchThrillerMysteryMovies(
+  language = "en-US",
+  page = 1,
+  with_genres = "9648"
+) {
+  const res = await fetch(
+    `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=${language}&with_genres=${with_genres}&sort_by=popularity.desc&page=${page}`,
+    { next: { revalidate: 3600 } }
+  );
+  const data = await res.json();
+  const tvShows = data.results.slice(0, 5); // 상위 5개
+  console.log("Fetched Thriller Mystery TV Shows:", tvShows);
+  return tvShows;
+}
 //New Releases 부분
 export async function fetchNewReleases(
   language = "en-US",
