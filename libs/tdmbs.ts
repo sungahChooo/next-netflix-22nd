@@ -10,6 +10,27 @@ export type TMDBMovie = {
   release_date?: string;
 };
 
+//Trending Now 부분
+export async function fetchTrendingMovies(
+  timeWindow: "day" | "week" = "week",
+  language = "ko-KR",
+  page = 1
+) {
+  const res = await fetch(
+    `${BASE_URL}/trending/movie/${timeWindow}?api_key=${API_KEY}&language=${language}&page=${page}`,
+    {
+      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch movies");
+  }
+
+  const data = await res.json();
+  return data.results;
+}
+
+//Popular on Netflix 부분
 export async function fetchPopularMovies(language = "ko-KR", page = 1) {
   const res = await fetch(
     `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${language}&page=${page}`,
@@ -22,10 +43,11 @@ export async function fetchPopularMovies(language = "ko-KR", page = 1) {
     throw new Error("Failed to fetch movies");
   }
 
-  const data = await res.json(); //응답 받은 json 저장
+  const data = await res.json();
   return data.results;
 }
 
+//영화 포스터 가져오기
 export async function fetchMovieById(id: number, language = "ko-KR") {
   const res = await fetch(
     `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`
