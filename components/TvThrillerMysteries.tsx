@@ -29,7 +29,7 @@ export default function TvThrillerMysteries() {
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2 mb-8">
-      <SectionTitle title="TV Thrillers & Mysterious" />
+      <SectionTitle title="TV Thrillers & Mysteries" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies
