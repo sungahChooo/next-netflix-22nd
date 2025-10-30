@@ -10,6 +10,25 @@ export type TMDBMovie = {
   release_date?: string;
 };
 
+//New Releases 부분
+export async function fetchNewReleases(
+  language = "en-US",
+  page = 1,
+  region = "US"
+) {
+  const res = await fetch(
+    `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=${language}&page=${page}&region=${region}`,
+    {
+      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch movies");
+  }
+  const data = await res.json();
+  return data.results;
+}
+
 //Netflix Originals 부분
 export async function fetchNetflixOriginals(
   language = "en-US",

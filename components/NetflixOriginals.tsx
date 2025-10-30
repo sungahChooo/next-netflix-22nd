@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchNetflixOriginals, fetchNollywoodMovies } from "@/libs/tdmbs";
+import { fetchNetflixOriginals } from "@/libs/tdmbs";
 
 type Movie = {
   id: number;
@@ -28,7 +28,7 @@ export default function NetflixOriginals() {
   }, []);
 
   return (
-    <section className="px-2 py-1 flex flex-col gap-2 pb-8">
+    <section className="px-2 py-1 flex flex-col gap-2 mb-8">
       <SectionTitle title="Netflix Originals" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
