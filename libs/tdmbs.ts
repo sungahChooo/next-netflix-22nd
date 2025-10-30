@@ -67,7 +67,7 @@ export async function fetchPopularMovies(language = "ko-KR", page = 1) {
   return data.results;
 }
 
-//영화 포스터 가져오기
+//영화 포스터 가져오기 Continue Watching & My List 부분
 export async function fetchMovieById(id: number, language = "ko-KR") {
   const res = await fetch(
     `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`

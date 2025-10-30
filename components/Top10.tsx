@@ -11,7 +11,7 @@ type Movie = {
   poster_path: string;
 };
 
-export default function Popular() {
+export default function Top10() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
