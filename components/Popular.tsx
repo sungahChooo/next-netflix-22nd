@@ -28,7 +28,7 @@ export default function Popular() {
   }, []);
 
   return (
-    <section className="px-2 py-2 flex flex-col gap-2">
+    <section className="px-2 py-1 flex flex-col gap-2">
       <SectionTitle title="Popular on Netflix" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
