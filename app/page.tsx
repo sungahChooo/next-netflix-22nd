@@ -1,15 +1,11 @@
-import Header from "@/components/Header";
-import Banner from "@/components/Banner";
+// src/app/page.tsx
+'use client';
 
-export default function Page() {
-    return (
-        <main className="min-h-screen mx-auto bg-black text-white h-[2000px] flex flex-col items-center relative">
-            <div className="fixed top-0  z-50">
-                <Header />
-            </div>
-            <div className="w-[390px]">
-                <Banner />
-            </div>
-        </main>
-    );
+export default function Home() {
+  return (
+    <main>
+      <h1>Hello Next.js 👋</h1>
+      <p>넷플릭스 클론 코딩 시작</p>
+    </main>
+  );
 }
