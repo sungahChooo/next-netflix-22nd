@@ -1,43 +1,50 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import home from "../public/icons/home.svg";
-import search from "../public/icons/search.svg";
-import comingSoon from "../public/icons/comingSoon.svg";
-import download from "../public/icons/download.svg";
-import menu from "../public/icons/menu.svg";
-
+import { usePathname } from "next/navigation";
+import Home from "../public/icons/home";
+import Search from "../public/icons/search";
+import ComingSoon from "../public/icons/comingSoon";
+import Download from "../public/icons/download";
+import Menu from "../public/icons/menu";
 
 export default function Navbar() {
+    const pathname = usePathname();
+
+    // Tailwind classes based on active page
+    const getLinkClass = (path: string) =>
+        pathname === path
+            ? "flex flex-col items-center text-white text-[8px]"
+            : "flex flex-col items-center text-[#8C8787] text-[8px]";
 
     return (
+        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 flex w-[375px] px-[26px] h-[48px] bg-none justify-between">
 
-        <div className="flex w-[375px] px-[26px] h-[48px] bg-none justify-between">
-            <button className="flex flex-col items-center text-white text-[8px] cursor-pointer">
-                <Image src={home} className="w-[24px] h-[24px]" alt="home" />
+            <Link href="/" className={getLinkClass("/")}>
+                <Home className="w-[24px] h-[24px]" />
                 <span>Home</span>
-            </button>
+            </Link>
 
-            <Link href="/home" className="flex flex-col items-center text-gray-400 text-[8px] cursor-pointer">
-                <Image src={search} className="w-[24px] h-[24px]" alt="search" />
+            <Link href="/search" className={getLinkClass("/search")}>
+                <Search className="w-[24px] h-[24px]" />
                 <span>Search</span>
             </Link>
 
-            <button className="flex flex-col items-center text-gray-400 text-[8px] cursor-pointer ">
-                <Image src={comingSoon} className="w-[24px] h-[24px]" alt="coming soon" />
+            <Link href="/comingSoon" className={getLinkClass("/comingSoon")}>
+                <ComingSoon className="w-[24px] h-[24px]" />
                 <span>Coming Soon</span>
-            </button>
+            </Link>
 
-            <button className="flex flex-col items-center text-gray-400 text-[8px] cursor-pointer">
-                <Image src={download} className="w-[24px] h-[24px]" alt="downloads" />
+            <Link href="/downloads" className={getLinkClass("/downloads")}>
+                <Download className="w-[24px] h-[24px]" />
                 <span>Downloads</span>
-            </button>
+            </Link>
 
-            <div className="flex flex-col items-center text-gray-400 text-[8px] cursor-pointer">
-                <Image src={menu} className="w-[24px] h-[24px]" alt="more" />
+            <Link href="/more" className={getLinkClass("/more")}>
+                <Menu className="w-[24px] h-[24px]" />
                 <span>More</span>
-            </div>
+            </Link>
+
         </div>
     );
 }
