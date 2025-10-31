@@ -56,27 +56,31 @@ export default function Banner() {
             )}
             {/*이미지 그레이디언트*/}
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
-                <div className="absolute inset-x-0 bottom-0 p-4 text-white z-10">
+                <div className="absolute inset-x-0 bottom-0 text-white z-10">
                 <div className="mb-3">
-                <span className="flex justify-center items-center gap-2 text-sm font-semibold tracking-wide">
-                <div className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white/60 rounded-sm">
-                <div className="text-[4.3px] leading-none">TOP</div>
+                <span className="flex justify-center items-center gap-2 text-sm font-semibold">
+                <div className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white rounded-sm">
+                <div className="text-[4.3px]">TOP</div>
                 <div className="text-[6.8px] leading-none">10</div>
                 </div>
+                    {/*현재는 한국1등으로 고정된 값*/}
                 <span className="opacity-90">#{rank} in {regionName} Today</span>
                 </span>
                 </div>
                 <div className="mx-auto justify-between flex w-[259px] h-[45px]">
+                    {/*MyList 버튼*/}
                     <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-white">
                         <Image src={add} alt="add icon" />
                         <span className="text-xs">My List</span>
                     </button>
 
+                    {/*play 버튼*/}
                     <button className="flex items-center w-[110px] h-[45px] justify-center bg-white text-black rounded-md py-2 font-semibold">
                         <Image src={play} alt="play icon" />
                         <span className={"ml-[13px]"}>Play</span>
                     </button>
 
+                    {/*Info 버튼*/}
                     <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-[13px] text-white">
                         <Image src={info} alt="info icon" />
                         <span>Info</span>

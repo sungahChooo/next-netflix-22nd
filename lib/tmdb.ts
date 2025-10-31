@@ -23,7 +23,7 @@ export async function getHeroBannerImage(): Promise<heroBannerImage> {
     });
     const first = data.results?.[0];
     return {
-        backdrop: backdropUrl(first?.backdrop_path, "w780"),
+        backdrop: backdropUrl(first?.backdropPath, "w780"),
     };
 }
 
