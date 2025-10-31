@@ -1,9 +1,9 @@
-// src/app/page.tsx
-export default function Home() {
+import LottieLogo from "./lottieLogo";
+
+export default function Landing() {
   return (
-    <main>
-      <h1>Hello Next.js 👋</h1>
-      <p>넷플릭스 클론 코딩 시작</p>
-    </main>
+    <div className="flex items-center justify-center min-h-screen bg-gray-900">
+      <LottieLogo />
+    </div>
   );
 }
