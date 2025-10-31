@@ -9,7 +9,6 @@ import add from '../public/icons/add.svg'
 import play from '../public/icons/play.svg'
 import info from '../public/icons/info.svg'
 
-
 const imgBase = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE;
 
 //URL만드는 함수
@@ -46,43 +45,46 @@ export default function Banner() {
     const backdrop = buildImageUrl(item?.backdrop_path ?? item?.poster_path, "w1280");
 
     return (
-        <section className="relative w-[390px] h-[560px] overflow-hidden rounded-xl bg-black">
-            {backdrop && (
-                <img
-                    src={backdrop}
-                    alt={title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                />
-            )}
-            {/*이미지 그레이디언트*/}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
-                <div className="absolute inset-x-0 bottom-0 text-white z-10">
+        <section className="rounded-xl overflow-hidden bg-black text-white">
+            <div className="relative h-[395px]">
+                {backdrop && (
+                    <img
+                        src={backdrop}
+                        alt={title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                    />
+                )}
+                {/* 이미지 그레디언트 */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80"/>
+            </div>
+
+            <div className="px-4 py-4">
                 <div className="mb-3">
-                <span className="flex justify-center items-center gap-2 text-sm font-semibold">
-                <div className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white rounded-sm">
-                <div className="text-[4.3px]">TOP</div>
-                <div className="text-[6.8px] leading-none">10</div>
+        <span className="flex justify-center items-center gap-2 text-sm font-semibold">
+          <span className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white rounded-sm leading-none">
+              <span className="text-[4.3px]">TOP</span>
+              <span className="text-[6.8px]">10</span>
+          </span>
+            <span className="opacity-90">#{rank} in {regionName} Today</span>
+        </span>
                 </div>
-                    {/*현재는 한국1등으로 고정된 값*/}
-                <span className="opacity-90">#{rank} in {regionName} Today</span>
-                </span>
-                </div>
-                <div className="mx-auto justify-between flex w-[259px] h-[45px]">
-                    {/*MyList 버튼*/}
-                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-white">
-                        <Image src={add} alt="add icon" />
+                <div className="mx-auto flex w-[259px] h-[45px] justify-between">
+                    {/* My List */}
+                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center">
+                        <Image src={add} alt="add icon"/>
                         <span className="text-xs">My List</span>
                     </button>
 
-                    {/*play 버튼*/}
-                    <button className="flex items-center w-[110px] h-[45px] justify-center bg-white text-black rounded-md py-2 font-semibold">
-                        <Image src={play} alt="play icon" />
-                        <span className={"ml-[13px]"}>Play</span>
+                    {/* Play */}
+                    <button
+                        className="flex items-center w-[110px] h-[45px] justify-center bg-white text-black rounded-md py-2 font-semibold">
+                        <Image src={play} alt="play icon"/>
+                        <span className="ml-[13px]">Play</span>
                     </button>
 
-                    {/*Info 버튼*/}
-                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-[13px] text-white">
-                        <Image src={info} alt="info icon" />
+                    {/* Info */}
+                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-[13px]">
+                        <Image src={info} alt="info icon"/>
                         <span>Info</span>
                     </button>
                 </div>
