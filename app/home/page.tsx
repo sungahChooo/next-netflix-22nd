@@ -1,19 +1,40 @@
-export default function Home() {
+import Banner from "../../components/Banner";
+import HomeHeader from "../../components/HomeHeader";
+import Previews from "../../components/Previews";
+import AfricanMovies from "@/components/AfricanMovies";
+import ContinueWataching from "@/components/ContinueWatching";
+import MyList from "@/components/MyList";
+import NetflixOriginals from "@/components/NetflixOriginals";
+import NewReleases from "@/components/NewReleases";
+import Nollywood from "@/components/Nollywood";
+import Popular from "@/components/Popular";
+import Top10 from "@/components/Top10";
+import TrendingNow from "@/components/TrendingNow";
+import ThrillerMysteries from "@/components/TvThrillerMysteries";
+import UsTvShow from "@/components/USTvShow";
+import WatchItAgain from "@/components/WatchItAgain";
+export default async function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      <div className="w-[390px] bg-black relative flex flex-col overflow-hidden rounded-[40px] shadow-2xl">
-        <header className="h-16 bg-gray-800 text-white flex items-center justify-center">
-          헤더영역
-        </header>
-        <main className="flex-1 overflow-y-auto text-white p-4">
-          배너 영역
-          <div className="h-64 bg-gray-700 my-4">섹션 영역</div>
-          <div className="h-64 bg-gray-600 my-4">섹션 영역</div>
-          <div className="h-64 bg-gray-600 my-4">섹션 영역</div>
-          <div className="h-64 bg-gray-600 my-4">섹션 영역</div>
-          <div className="h-64 bg-gray-600 my-4">섹션 영역</div>
-          <div className="h-64 bg-gray-600 my-4">섹션 영역</div>
-        </main>
+    <div className="flex items-center justify-center min-h-screen bg-black">
+      <div className="w-[375px] bg-transparent relative flex flex-col overflow-hidden pb-4">
+        <div className="h-16 bg-black text-white flex items-center justify-center">
+          <HomeHeader />
+        </div>
+        <Banner />
+        <Previews />
+        <ContinueWataching />
+        <Popular />
+        <TrendingNow />
+        <Top10 />
+        <MyList />
+        <AfricanMovies />
+        <Nollywood />
+        <NetflixOriginals />
+        <WatchItAgain />
+        <NewReleases />
+        <ThrillerMysteries />
+        <UsTvShow />
+
       </div>
     </div>
   );

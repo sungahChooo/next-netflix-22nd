@@ -1,8 +1,10 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import IndicatorBar from '@/components/IndicatorBar';
-import localFont from 'next/font/local';
+
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import IndicatorBar from "@/components/IndicatorBar";
+import Navbar from "@/components/Navbar";
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,13 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center min-h-screen bg-white relative`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center min-h-screen bg-white `}
       >
-        {/* 휴대폰 프레임 */}
-        <div className="w-[390px] h-[700px] rounded-[40px] shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden pb-5">
-          {children}
-          <IndicatorBar />
-        </div>
+        {children}
+        <Navbar />
+        <IndicatorBar />
       </body>
     </html>
   );
