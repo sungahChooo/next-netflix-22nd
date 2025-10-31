@@ -1,22 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMovieById } from "@/lib/tdmbs";
+import { fetchMovieById } from "../lib/api/tdmb/movie";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";
+import type { TMDBMovie } from "../lib/api/types/tdmbs";
 
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
 // 사용자 이름 가져오기 (더미 데이터 기준)
 const userName = watchHistory[0]?.userName || "User";
 const MOCK_WATCHING_IDS = [550, 299534, 155, 597, 681];
 
 export default function ContinueWatching() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     async function loadMovies() {

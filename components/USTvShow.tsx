@@ -3,16 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchUSTVShows } from "@/lib/tdmbs";
-
-type TvShow = {
-  id: number;
-  name: string;
-  poster_path: string;
-};
+import { fetchUSTVShows } from "../lib/api/tdmb/tv";
+import type { TMDBTvShow } from "../lib/api/types/tdmbs";
 
 export default function UsTvShow() {
-  const [movies, setMovies] = useState<TvShow[]>([]);
+  const [movies, setMovies] = useState<TMDBTvShow[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {

@@ -1,19 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMovieById } from "@/lib/tdmbs";
+import { fetchMovieById } from "../lib/api/tdmb/movie";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";
-
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
+import type { TMDBMovie } from "../lib/api/types/tdmbs";
 
 export default function WatchItAgain() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     async function loadMovies() {

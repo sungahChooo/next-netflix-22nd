@@ -3,16 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchThrillerMysteryMovies } from "@/lib/tdmbs";
-
-type Tv = {
-  id: number;
-  name: string; //title 아님
-  poster_path: string;
-};
+import { fetchThrillerMysteryMovies } from "../lib/api/tdmb/movie";
+import type { TMDBTvShow } from "../lib/api/types/tdmbs";
 
 export default function TvThrillerMysteries() {
-  const [movies, setMovies] = useState<Tv[]>([]);
+  const [movies, setMovies] = useState<TMDBTvShow[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {

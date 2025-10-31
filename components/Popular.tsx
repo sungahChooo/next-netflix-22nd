@@ -3,16 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchPopularMovies } from "@/lib/tdmbs";
-
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
+import { fetchPopularMovies } from "../lib/api/tdmb/movie";
+import type { TMDBMovie } from "../lib/api/types/tdmbs";
 
 export default function Popular() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     const getPopularMovies = async () => {

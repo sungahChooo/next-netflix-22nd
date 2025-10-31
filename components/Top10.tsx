@@ -3,16 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchTop10Movies } from "@/lib/tdmbs";
-
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
+import { fetchTop10Movies } from "../lib/api/tdmb/movie";
+import type { TMDBMovie } from "../lib/api/types/tdmbs";
 
 export default function Top10() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {

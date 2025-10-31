@@ -3,16 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchAfricanMovies } from "@/lib/tdmbs";
-
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
+import { fetchAfricanMovies } from "../lib/api/tdmb/movie";
+import type { TMDBMovie } from "../lib/api/types/tdmbs";
 
 export default function AfricanMovies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     const getAfricanMovies = async () => {

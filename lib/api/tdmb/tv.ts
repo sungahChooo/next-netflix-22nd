@@ -1,6 +1,7 @@
 import { BASE_URL, API_KEY, REVALIDATE_TIME } from "../../constants/tdmbs";
 import type { TMDBTvShow, TMDBApiResponse } from "../types/tdmbs";
 
+//US tv shows 부분
 export async function fetchUSTVShows(
   language = "en-US",
   with_origin_country = "US",
@@ -24,4 +25,13 @@ export async function fetchThrillerMysteryTV(
   );
   const data: TMDBApiResponse<TMDBTvShow> = await res.json();
   return data.results.slice(0, 5);
+}
+
+//tv 포스터 가져오기
+export async function fetchTvById(id: number, language = "en-US") {
+  const res = await fetch(
+    `${BASE_URL}/tv/${id}?api_key=${API_KEY}&language=${language}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch movie details");
+  return res.json();
 }
