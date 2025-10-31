@@ -2,6 +2,7 @@
 import Banner from '../../components/Banner'
 import Header from '../../components/Header'
 import Previews from '../../components/Previews'
+import Navbar from '../../components/Navbar'
 
 export default function Home() {
     return (
@@ -14,6 +15,9 @@ export default function Home() {
             </div>
             <div className="w-[390px]">
                 <Previews/>
+            </div>
+            <div className="w-[390px]">
+                <Navbar />
             </div>
         </main>
     );

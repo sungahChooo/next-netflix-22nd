@@ -17,7 +17,7 @@ export default function Previews() {
             <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar">
                 {items.map((item, i) => (
                     <div key={i} className="shrink-0 snap-start">
-                        <img src={item.poster} alt={`preview-${i}`} className="w-[102px] h-[102px] mr-[7px] mt-[23px] rounded-full object-cover"/>
+                        <img src={item.poster} alt={`preview-${i}`} className="w-[102px] h-[102px] mr-[7px] mt-[12px] rounded-full object-cover"/>
                     </div>
                 ))}
             </div>
