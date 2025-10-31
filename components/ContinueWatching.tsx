@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMovieById } from "@/libs/tdmbs";
+import { fetchMovieById } from "@/lib/tdmbs";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";

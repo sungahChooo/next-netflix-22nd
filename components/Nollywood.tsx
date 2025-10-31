@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchNollywoodMovies } from "@/libs/tdmbs";
+import { fetchNollywoodMovies } from "@/lib/tdmbs";
 
 type Movie = {
   id: number;
