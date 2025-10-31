@@ -1,3 +1,6 @@
+import Banner from "../../components/Banner";
+import HomeHeader from "../../components/HomeHeader";
+import Previews from "../../components/Previews";
 import AfricanMovies from "@/components/AfricanMovies";
 import ContinueWataching from "@/components/ContinueWatching";
 import MyList from "@/components/MyList";
@@ -12,13 +15,13 @@ import UsTvShow from "@/components/USTvShow";
 import WatchItAgain from "@/components/WatchItAgain";
 export default async function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      <div className="w-[375px] bg-black relative flex flex-col overflow-hidden">
-        <header className="h-16 bg-gray-800 text-white flex items-center justify-center">
-          헤더영역
-        </header>
-        <div className="flex overflow-y-auto text-white">배너 영역</div>
-
+    <div className="flex items-center justify-center min-h-screen bg-black">
+      <div className="w-[375px] bg-transparent relative flex flex-col overflow-hidden pb-4">
+        <div className="h-16 bg-black text-white flex items-center justify-center">
+          <HomeHeader />
+        </div>
+        <Banner />
+        <Previews />
         <ContinueWataching />
         <Popular />
         <TrendingNow />
