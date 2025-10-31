@@ -4,7 +4,7 @@ export interface tmdbTitle {
     title?: string;
     name?: string;
     backdrop_path?: string | null;
-    poster_path?: string | null;
+    poster_path?: string | null;  //프리뷰사진용
 }
 
 //generic type으로 tmdb응답 받기
@@ -14,3 +14,6 @@ export interface tmdbListResponse<T> {
     total_pages: number;
     total_results: number;
 }
+
+export type heroBannerImage = { backdrop: string };
+export type previewPoster = { poster: string };
