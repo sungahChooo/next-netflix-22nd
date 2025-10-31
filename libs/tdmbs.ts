@@ -1,16 +1,6 @@
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
-//TMDBMovie 타입 정의 추후 사용을 위해 export
-export type TMDBMovie = {
-  id: number;
-  title: string;
-  poster_path: string | null;
-  backdrop_path: string | null;
-  overview: string;
-  release_date?: string;
-};
-
 //US tv shows 부분
 export async function fetchUSTVShows(
   language = "en-US",
