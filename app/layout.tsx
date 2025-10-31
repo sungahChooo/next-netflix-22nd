@@ -31,8 +31,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center min-h-screen bg-white relative`}
       >
-        {children}
-        <IndicatorBar />
+        {/* 휴대폰 프레임 */}
+        <div className="w-[390px] h-[700px] rounded-[40px] shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden pb-5">
+          {children}
+          <IndicatorBar />
+        </div>
       </body>
     </html>
   );

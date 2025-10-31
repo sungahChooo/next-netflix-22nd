@@ -1,6 +1,6 @@
 export default function IndicatorBar() {
   return (
-    <div className="bg-transparent absolute bottom-0 z-[980] flex w-full justify-center">
+    <div className="fixed bg-transparent bottom-0 w-[390px] flex justify-center z-900">
       <div className="bg-[#FFFFFF] mt-[18.12px] mb-[9.35px] h-[4.53px] w-[121.38px] rounded-[90.58px]" />
     </div>
   );
