@@ -1,37 +1,29 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetcher } from "@/lib/fetcher";
 import type { tmdbListResponse, tmdbTitle } from "@/types/tmdb";
 import Image from "next/image";
 import add from "../public/icons/add.svg";
 import play from "../public/icons/play.svg";
 import info from "../public/icons/info.svg";
+import { bannerTimer } from "@/hooks/bannerTimer";
 
 const imgBase = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE || "https://image.tmdb.org/t/p";
-const rotateTime = 20_000; // 20초 간격 (임의)
+const rotateTime = 20_000; // 20초
 const regionName = "Korea";
 
-// URL 만드는 함수
-function buildImageUrl(
-    path?: string | null,
-    size: "w780" | "w1280" | "original" = "w1280"
-) {
+// 이미지 URL
+function buildImageUrl(path?: string | null, size: "w780" | "w1280" | "original" = "w1280") {
     if (!path) return "";
-    try {
-        const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-        return `${imgBase}/${size}/${cleanPath}`;
-    } catch {
-        return "";
-    }
+    return `${imgBase}/${size}/${path.startsWith("/") ? path.slice(1) : path}`;
 }
 
 export default function Banner() {
     const [items, setItems] = useState<tmdbTitle[]>([]);
     const [index, setIndex] = useState(0);
-    const timerRef = useRef<number | null>(null);
 
-    // 한국 인기 Top10 첫 마운트 로드
+    // API 요청
     useEffect(() => {
         (async () => {
             try {
@@ -40,36 +32,15 @@ export default function Banner() {
                     { language: "ko-KR", region: "KR", page: "1" }
                 );
                 setItems((data.results ?? []).slice(0, 10));
-                setIndex(0);
             } catch (e) {
                 console.error(e);
             }
         })();
     }, []);
 
-    // 20초마다 변경
-    useEffect(() => {
-        if (!items.length) return;
-        const start = () => {
-            stop();
-            timerRef.current = window.setInterval(() => {
-                setIndex((i) => (i + 1) % items.length); //index증가
-            }, rotateTime);
-        };
-        const stop = () => {
-            if (timerRef.current) {
-                window.clearInterval(timerRef.current);
-                timerRef.current = null;
-            }
-        };
+    bannerTimer(items.length, rotateTime, setIndex);
 
-        start();
-        return () => {
-            stop();
-        };
-    }, [items.length]);
-
-    const current = items[index] ?? null;
+    const current = items[index];
     const title = current?.title ?? current?.name ?? "";
     const backdrop = useMemo(
         () => buildImageUrl(current?.backdrop_path ?? current?.poster_path, "w1280"),
@@ -91,38 +62,31 @@ export default function Banner() {
                         className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
                     />
                 )}
-                {/* 이미지 그레이디언트 */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
             </div>
 
             <div className="px-4 py-4">
-                <div className="mb-3">
-          <span className="flex justify-center items-center gap-2 text-sm font-semibold">
-            <span className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white rounded-sm leading-none">
-              <span className="text-[4.3px]">TOP</span>
-              <span className="text-[6.8px]">10</span>
-            </span>
-            <span className="opacity-90">
-              #{rank} in {regionName} Today
-            </span>
+                <div className="mb-3 flex justify-center items-center gap-2 text-sm font-semibold">
+          <span className="flex flex-col justify-center items-center w-[15px] h-[15px] border border-white rounded-sm leading-none">
+            <span className="text-[4.3px]">TOP</span>
+            <span className="text-[6.8px]">10</span>
           </span>
+                    <span className="opacity-90">#{rank} in {regionName} Today</span>
                 </div>
+
                 <div className="mx-auto flex w-[259px] h-[45px] justify-between">
-                    {/* My List */}
-                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center">
-                        <Image src={add} alt="add icon" />
+                    <button className="flex flex-col items-center justify-center w-[41px] h-[45px]">
+                        <Image src={add} alt="add" />
                         <span className="text-xs">My List</span>
                     </button>
 
-                    {/* Play */}
-                    <button className="flex items-center w-[110px] h-[45px] justify-center bg-white text-black rounded-md py-2 font-semibold">
-                        <Image src={play} alt="play icon" />
+                    <button className="flex items-center justify-center w-[110px] h-[45px] bg-white text-black rounded-md py-2 font-semibold">
+                        <Image src={play} alt="play" />
                         <span className="ml-[13px]">Play</span>
                     </button>
 
-                    {/* Info */}
-                    <button className="flex flex-col w-[41px] h-[45px] items-center justify-center text-[13px]">
-                        <Image src={info} alt="info icon" />
+                    <button className="flex flex-col items-center justify-center w-[41px] h-[45px] text-[13px]">
+                        <Image src={info} alt="info" />
                         <span>Info</span>
                     </button>
                 </div>
