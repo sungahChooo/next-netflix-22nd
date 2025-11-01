@@ -34,6 +34,7 @@ export default async function Home() {
         <NewReleases />
         <ThrillerMysteries />
         <UsTvShow />
+
       </div>
     </div>
   );

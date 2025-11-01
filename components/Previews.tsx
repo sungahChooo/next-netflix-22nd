@@ -14,7 +14,7 @@ export default function Previews() {
     return (
         <div className="flex-col w-[390px] px-[12px] pt-[23px]">
             <span className="text-white text-[27px] font-semibold mb-[23px]">Previews</span>
-            <div className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar">
+            <div className="flex overflow-x-hide snap-x snap-mandatory ">
                 {items.map((item, i) => (
                     <div key={i} className="shrink-0 snap-start">
                         <img src={item.poster} alt={`preview-${i}`} className="w-[102px] h-[102px] mr-[7px] mt-[12px] rounded-full object-cover"/>
