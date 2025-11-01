@@ -79,7 +79,7 @@ export default function Banner() {
 
     return (
         <section className="rounded-xl overflow-hidden bg-black text-white">
-            <div className="relative h-[395px]">
+            <div className="relative h-[320px]">
                 {backdrop && (
                     <Image
                         key={backdrop}
