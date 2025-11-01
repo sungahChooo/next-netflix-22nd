@@ -1,11 +1,9 @@
-export default function ComingSoonIcon(props: React.SVGProps<SVGSVGElement>) {
+export default function comingSoon(
+    props: React.SVGProps<SVGSVGElement>
+) {
     return (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <path d="M22 9.15789L12 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M2 9.15789L12 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M5 19V7.36841" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M19 19V7.36841" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M5 19H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"{...props}>
+            <path d="M2 4H0V18C0 19.1 0.9 20 2 20H16V18H2V4ZM18 0H6C4.9 0 4 0.9 4 2V14C4 15.1 4.9 16 6 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0ZM18 14H6V2H18V14ZM10 3.5V12.5L16 8L10 3.5Z" fill="currentColor"/>
         </svg>
     );
 }

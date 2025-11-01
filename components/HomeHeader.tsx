@@ -1,6 +1,6 @@
 "use client";
 
-import logo from "../public/icons/logo.svg";
+import logo from "@/public/icons/logo.svg";
 import Image from "next/image";
 
 export default function Header() {

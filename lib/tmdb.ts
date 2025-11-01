@@ -8,6 +8,8 @@ import type {
 } from "@/types/tmdb";
 const IMG_BASE = "https://image.tmdb.org/t/p";
 
+
+
 //배너용 이미지 URL
 function backdropUrl(path: string | null | undefined, size = "w780") {
   return path ? `${IMG_BASE}/${size}${path}` : "";

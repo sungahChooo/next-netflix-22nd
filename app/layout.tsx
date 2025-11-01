@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import IndicatorBar from "@/components/IndicatorBar";
-import Navbar from "@/components/Navbar";
+import NavbarWrapper from "@/components/NavbarWrapper";
 
 
 const geistSans = Geist({
@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center min-h-screen bg-white `}
       >
         {children}
-        <Navbar />
+        <NavbarWrapper />
         <IndicatorBar />
       </body>
     </html>
