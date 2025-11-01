@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/SectionTitle";
-import { fetchNewReleases } from "../lib/api/tdmb/movie";
-import type { TMDBMovie } from "../lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/SectionTitle";
+import { fetchTrendingMovies } from "@/lib/api/tdmb/movie";
+import type { TMDBMovie } from "@/lib/api/types/tdmbs";
 
-export default function NewReleases() {
+export default function TrendingNow() {
   const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const movieData = await fetchNewReleases();
+        const movieData = await fetchTrendingMovies();
         setMovies(movieData);
       } catch (error) {
         console.error("Failed to fetch popular movies:", error);
@@ -23,8 +23,8 @@ export default function NewReleases() {
   }, []);
 
   return (
-    <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="New Releases" />
+    <section className="px-2 py-2 flex flex-col gap-2">
+      <SectionTitle title="Trending Now" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies

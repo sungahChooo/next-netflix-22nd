@@ -2,29 +2,29 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/SectionTitle";
-import { fetchThrillerMysteryMovies } from "../lib/api/tdmb/movie";
-import type { TMDBTvShow } from "../lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/SectionTitle";
+import { fetchPopularMovies } from "@/lib/api/tdmb/movie";
+import type { TMDBMovie } from "@/lib/api/types/tdmbs";
 
-export default function TvThrillerMysteries() {
-  const [movies, setMovies] = useState<TMDBTvShow[]>([]);
+export default function Popular() {
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
-    const loadMovies = async () => {
+    const getPopularMovies = async () => {
       try {
-        const movieData = await fetchThrillerMysteryMovies();
+        const movieData = await fetchPopularMovies();
         setMovies(movieData);
       } catch (error) {
         console.error("Failed to fetch popular movies:", error);
       }
     };
 
-    loadMovies();
+    getPopularMovies();
   }, []);
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="TV Thrillers & Mysteries" />
+      <SectionTitle title="Popular on Netflix" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies
@@ -37,7 +37,7 @@ export default function TvThrillerMysteries() {
             >
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.name}
+                alt={movie.title}
                 fill
                 sizes="(max-width: 768px) 30vw, 103px"
                 className="rounded-xs transition-transform duration-200 group-hover:scale-105"
