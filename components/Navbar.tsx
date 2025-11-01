@@ -18,7 +18,7 @@ export default function Navbar() {
       : "flex flex-col items-center text-[#8C8787] text-[8px]";
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex w-[375px] px-6 pt-2 h-[48px] bg-black justify-between">
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex w-93 px-6 pt-2 h-[48px] bg-black justify-between">
       <Link href="/home" className={getLinkClass("/home")}>
         <Home className="w-[24px] h-[24px]" />
         <span>Home</span>
