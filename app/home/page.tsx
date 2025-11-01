@@ -1,18 +1,18 @@
-import Banner from "../../components/Banner";
-import HomeHeader from "../../components/HomeHeader";
-import Previews from "../../components/Previews";
-import AfricanMovies from "@/components/AfricanMovies";
-import ContinueWataching from "@/components/ContinueWatching";
-import MyList from "@/components/MyList";
-import NetflixOriginals from "@/components/NetflixOriginals";
-import NewReleases from "@/components/NewReleases";
-import Nollywood from "@/components/Nollywood";
-import Popular from "@/components/Popular";
-import Top10 from "@/components/Top10";
-import TrendingNow from "@/components/TrendingNow";
-import ThrillerMysteries from "@/components/TvThrillerMysteries";
-import UsTvShow from "@/components/USTvShow";
-import WatchItAgain from "@/components/WatchItAgain";
+import Banner from "../../components/home/Banner";
+import HomeHeader from "../../components/home/HomeHeader";
+import Previews from "@/components/home/Previews";
+import AfricanMovies from "@/components/home/AfricanMovies";
+import ContinueWataching from "@/components/home/ContinueWatching";
+import MyList from "@/components/home/MyList";
+import NetflixOriginals from "@/components/home/NetflixOriginals";
+import NewReleases from "@/components/home/NewReleases";
+import Nollywood from "@/components/home/Nollywood";
+import Popular from "@/components/home/Popular";
+import Top10 from "@/components/home/Top10";
+import TrendingNow from "@/components/home/TrendingNow";
+import ThrillerMysteries from "@/components/home/TvThrillerMysteries";
+import UsTvShow from "@/components/home/USTvShow";
+import WatchItAgain from "@/components/home/WatchItAgain";
 export default async function Home() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMovieById } from "../lib/api/tdmb/movie";
+import { fetchMovieById } from "@/lib/api/tdmb/movie";
 import Image from "next/image";
-import SectionTitle from "@/components/SectionTitle";
+import SectionTitle from "@/components/home/SectionTitle";
 
 type Movie = {
   id: number;

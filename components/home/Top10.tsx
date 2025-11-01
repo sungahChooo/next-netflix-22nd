@@ -2,34 +2,34 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/SectionTitle";
-import { fetchAfricanMovies } from "../lib/api/tdmb/movie";
-import type { TMDBMovie } from "../lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/SectionTitle";
+import { fetchTop10Movies } from "@/lib/api/tdmb/movie";
+import type { TMDBMovie } from "@/lib/api/types/tdmbs";
 
-export default function AfricanMovies() {
+export default function Top10() {
   const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
-    const getAfricanMovies = async () => {
+    const loadMovies = async () => {
       try {
-        const movieData = await fetchAfricanMovies();
+        const movieData = await fetchTop10Movies();
         setMovies(movieData);
       } catch (error) {
         console.error("Failed to fetch popular movies:", error);
       }
     };
 
-    getAfricanMovies();
+    loadMovies();
   }, []);
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="African Movies" />
+      <SectionTitle title="Top 10 in Nigeria Today" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies
           .filter((movie) => movie.poster_path) // null 아닌 것만
-          .slice(0, 5) // 5개만 표시
+          .slice(0, 10) // 10개 표시!
           .map((movie) => (
             <div
               key={movie.id}

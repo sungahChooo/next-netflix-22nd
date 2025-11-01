@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/SectionTitle";
-import { fetchUSTVShows } from "../lib/api/tdmb/tv";
-import type { TMDBTvShow } from "../lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/SectionTitle";
+import { fetchUSTVShows } from "@/lib/api/tdmb/tv";
+import type { TMDBTvShow } from "@/lib/api/types/tdmbs";
 
 export default function UsTvShow() {
   const [movies, setMovies] = useState<TMDBTvShow[]>([]);

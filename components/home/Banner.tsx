@@ -4,9 +4,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { fetcher } from "@/lib/fetcher";
 import type { tmdbListResponse, tmdbTitle } from "@/types/tmdb";
 import Image from "next/image";
-import add from "../public/icons/add.svg";
-import play from "../public/icons/play.svg";
-import info from "../public/icons/info.svg";
+import add from "@/public/icons/add.svg";
+import play from "@/public/icons/play.svg";
+import info from "@/public/icons/info.svg";
 
 const imgBase = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE || "https://image.tmdb.org/t/p";
 const rotateTime = 20_000; // 20초 간격 (임의)
