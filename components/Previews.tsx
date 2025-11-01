@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPreviewPosters } from "@/lib/tmdb"; // 네 파일 경로에 맞게 수정
+import { getPreviewPosters } from "@/lib/tmdb";
 
 export default function Previews() {
     //포스터용 URL 배열
