@@ -73,3 +73,7 @@ body {
   color: var(--foreground);
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
