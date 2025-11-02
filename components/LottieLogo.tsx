@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import LogoAnimation from "./animations/logo.json";
+import LogoAnimation from "@/public/animations/logo.json";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
