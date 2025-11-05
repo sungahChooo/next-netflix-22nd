@@ -127,7 +127,18 @@ export async function fetchTrendingMovies(
 
 //영화 포스터 가져오기 Continue Watching & My List 부분
 export async function fetchMovieById(id: number, language = 'en-US') {
-  const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${language}`);
-  if (!res.ok) throw new Error('Failed to fetch movie details');
-  return res.json();
+  try {
+    const res = await axios.get(`${BASE_URL}/movie/${id}`, {
+      params: {
+        api_key: API_KEY,
+        id,
+        language,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log('fetch movie by id error: ', error);
+    return null;
+  }
 }
