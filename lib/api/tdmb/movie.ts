@@ -78,24 +78,28 @@ export async function fetchKoreanMovies(region = 'KR', language = 'en-US', page 
   }
 }
 
-//Top 10 in Nigiria 부분
+//Top 10 in Korea 부분
 export async function fetchTop10Movies(
-  region = 'NG', //기준 국가 정할 수 있음
+  region = 'KR', //기준 국가 정할 수 있음
   language = 'en-US',
   page = 1,
 ) {
-  const res = await fetch(
-    `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&region=${region}&language=${language}&page=${page}`,
-    {
-      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
-    },
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch movies');
-  }
+  try {
+    const res = await axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/movie/top_rated`, {
+      params: {
+        api_key: API_KEY,
+        region,
+        language,
+        sort_by: 'popularity.desc',
+        page,
+      },
+    });
 
-  const data = await res.json();
-  return data.results;
+    return res.data.results;
+  } catch (error) {
+    console.log('fetch top 10 movies error:', error);
+    return [];
+  }
 }
 
 //Trending Now 부분
@@ -104,18 +108,21 @@ export async function fetchTrendingMovies(
   language = 'en-US',
   page = 1,
 ) {
-  const res = await fetch(
-    `${BASE_URL}/trending/movie/${timeWindow}?api_key=${API_KEY}&language=${language}&page=${page}`,
-    {
-      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
-    },
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch movies');
+  try {
+    const res = await axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/trending/movie/${timeWindow}`, {
+      params: {
+        api_key: API_KEY,
+        timeWindow,
+        language,
+        sort_by: 'popularity.desc',
+        page,
+      },
+    });
+    return res.data.results;
+  } catch (error) {
+    console.log('fetch trending movies error:', error);
+    return [];
   }
-
-  const data = await res.json();
-  return data.results;
 }
 
 //영화 포스터 가져오기 Continue Watching & My List 부분

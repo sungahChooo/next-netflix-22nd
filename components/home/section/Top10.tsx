@@ -15,7 +15,7 @@ export default function Top10() {
         const movieData = await fetchTop10Movies();
         setMovies(movieData);
       } catch (error) {
-        console.error('Failed to fetch popular movies:', error);
+        console.error('Failed to fetch top 10 movies:', error);
       }
     };
 
@@ -24,7 +24,7 @@ export default function Top10() {
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="Top 10 in Nigeria Today" />
+      <SectionTitle title="Top 10 in Korea Today" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom cursor-pointer">
         {movies
