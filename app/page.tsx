@@ -1,6 +1,6 @@
 'use client';
 
-import LottieLogo from "../components/LottieLogo";
+import LottieLogo from '../components/LottieLogo';
 
 export default function Landing() {
   return (
@@ -9,7 +9,3 @@ export default function Landing() {
     </div>
   );
 }
-
-
-
-

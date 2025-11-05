@@ -1,59 +1,79 @@
-import { BASE_URL, API_KEY, REVALIDATE_TIME } from "../../constants/tdmbs";
-import type { TMDBApiResponse, TMDBMovie, TMDBTvShow } from "../types/tdmbs";
+import { BASE_URL, API_KEY, REVALIDATE_TIME } from '@/lib/constants/tdmbs';
+import type { TMDBApiResponse, TMDBMovie, TMDBTvShow } from '@/lib/api/types/tdmbs';
+import axios from 'axios';
 
 //Netflix Originals 부분
 export async function fetchNetflixOriginals(
-  language = "en-US",
+  language = 'en-US',
   page = 1,
   netflixID = 213,
   with_watch_providers = 8,
-  watch_region = "US"
+  watch_region = 'US',
 ) {
-  const [movieRes, tvRes] = await Promise.all([
-    fetch(
-      //netflix originals 영화 API 호출
-      `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=${language}&with_watch_providers=${with_watch_providers}&watch_region=${watch_region}&sort_by=popularity.desc&page=${page}`,
-      { next: { revalidate: REVALIDATE_TIME } }
-    ),
-    fetch(
-      //netflix originals tv 쇼 API 호출
-      `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=${language}&with_networks=${netflixID}&sort_by=popularity.desc&page=${page}`,
-      { next: { revalidate: REVALIDATE_TIME } }
-    ),
-  ]);
+  try {
+    const [movieRes, tvRes] = await Promise.all([
+      axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/discover/movie`, {
+        params: {
+          api_key: API_KEY,
+          language,
+          with_watch_providers,
+          watch_region,
+          sort_by: 'popularity.desc',
+          page,
+        },
+      }),
+      axios.get<TMDBApiResponse<TMDBTvShow>>(`${BASE_URL}/discover/tv`, {
+        params: {
+          api_key: API_KEY,
+          language,
+          with_networks: netflixID,
+          sort_by: 'popularity.desc',
+          page,
+        },
+      }),
+    ]);
 
-  const movieData: TMDBApiResponse<TMDBMovie> = await movieRes.json();
-  const tvData: TMDBApiResponse<TMDBTvShow> = await tvRes.json();
+    // axios는 자동으로 JSON 파싱해서 .data에 담깁니다.
+    const movieData = movieRes.data;
+    const tvData = tvRes.data;
 
-  return [...movieData.results.slice(0, 5), ...tvData.results.slice(0, 5)];
+    return [...movieData.results.slice(0, 5), ...tvData.results.slice(0, 5)];
+  } catch (error) {
+    console.error('❌ fetchNetflixOriginals error:', error);
+    return [];
+  }
 }
 
-//Nollywood Movies & TV 부분
-export async function fetchNollywoodMovies(
-  region = "NG",
-  language = "en-US",
-  page = 1
-) {
-  //나이지리아 영화 API 호출
-  const moviesRes = await fetch(
-    `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_origin_country=${region}&language=${language}&sort_by=popularity.desc&page=${page}`,
-    {
-      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
-    }
-  );
-  const moviesData = await moviesRes.json();
-  const movies = moviesData.results.slice(0, 5) || []; // 상위 5개
+//Hollywood Movies & TV 부분
+export async function fetchHollywoodMovies(region = 'US', language = 'en-US', page = 1) {
+  try {
+    const [moviesRes, tvRes] = await Promise.all([
+      axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/discover/movie`, {
+        params: {
+          api_key: API_KEY,
+          with_origin_country: region,
+          language,
+          sort_by: 'popularity.desc',
+          page,
+        },
+      }),
+      axios.get<TMDBApiResponse<TMDBTvShow>>(`${BASE_URL}/discover/tv`, {
+        params: {
+          api_key: API_KEY,
+          with_origin_country: region,
+          language,
+          sort_by: 'popularity.desc',
+          page,
+        },
+      }),
+    ]);
 
-  //나이지리아 tv 쇼 API 호출
-  const tvRes = await fetch(
-    `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_origin_country=${region}&language=${language}&sort_by=popularity.desc&page=${page}`,
-    {
-      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
-    }
-  );
-  const tvShowData = await tvRes.json();
-  const tvShows = tvShowData.results.slice(0, 5) || []; // 상위 5개
+    const movies = moviesRes.data.results.slice(0, 5);
+    const tvShows = tvRes.data.results.slice(0, 5);
 
-  const combined = [...movies, ...tvShows];
-  return combined;
+    return [...movies, ...tvShows];
+  } catch (error) {
+    console.error('❌ fetchHollywoodMovies error:', error);
+    return [];
+  }
 }

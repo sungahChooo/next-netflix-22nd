@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import logo from "@/public/icons/logo.svg";
-import Image from "next/image";
+import logo from '@/public/icons/logo.svg';
+import Image from 'next/image';
 
 export default function HomeHeader() {
   return (
