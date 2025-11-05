@@ -37,26 +37,6 @@ export async function fetchPopularMovies(language = 'en-US', page = 1): Promise<
   }
 }
 
-//TV Thriller Mysteries 부분
-//Tv 장르에는 Thriller 장르 코드가 없음
-//Mystery 장르코드인 9648만 사용
-export async function fetchMysteryMovies(language = 'en-US', page = 1, with_genres = '9648') {
-  try {
-    const res = await axios.get<TMDBApiResponse<TMDBTvShow>>(`${BASE_URL}/discover/tv`, {
-      params: {
-        api_key: API_KEY,
-        language,
-        page,
-        with_genres,
-      },
-    });
-    return res.data.results.slice(0, 5); // 상위 5개
-  } catch (error) {
-    console.log('fetchThrillerMysteryMovies error:', error);
-    return [];
-  }
-}
-
 //Korean Movies 부분
 //한국 영화 인기순 조회
 //with_origin_country=KR → 그 나라에서 상영 중인 영화가 아닌 진짜 한국 영화/TV 선택

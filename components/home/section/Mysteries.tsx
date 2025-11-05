@@ -3,16 +3,16 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import SectionTitle from '@/components/home/section/SectionTitle';
-import { fetchMysteryMovies } from '@/lib/api/tdmb/movie';
+import { fetchMysteryTv } from '@/lib/api/tdmb/tv';
 import type { TMDBTvShow } from '@/lib/api/types/tdmbs';
 
-export default function TvThrillerMysteries() {
+export default function Mysteries() {
   const [movies, setMovies] = useState<TMDBTvShow[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const movieData = await fetchMysteryMovies();
+        const movieData = await fetchMysteryTv();
         setMovies(movieData);
       } catch (error) {
         console.error('Failed to fetch Mysteries movies:', error);
