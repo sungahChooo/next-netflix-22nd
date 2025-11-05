@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "svgr:navbarIcons": "svgr --typescript --icon --replace-attr-values '#000=currentColor,#8C8787=currentColor,#FFFFFF=currentColor' --out-dir public/icons/iconsGen public/icons/navbarIcons",
+    "prebuild": "npm run svgr:navbarIcons"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.1.4",
@@ -19,6 +21,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -34,7 +38,5 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "typescript-eslint": "^8.46.2"
-
   }
 }
-
