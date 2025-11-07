@@ -6,6 +6,7 @@ import Image from "next/image";
 import SectionTitle from "@/components/home/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";
 import type { TMDBMovie } from "../../lib/api/types/tdmbs";
+import Thumbnail from '@/components/Thumbnail';
 
 // 사용자 이름 가져오기 (더미 데이터 기준)
 const userName = watchHistory[0]?.userName || "User";
@@ -36,13 +37,7 @@ export default function ContinueWatching() {
               key={movie.id}
               className="relative w-[103px] h-[161px] flex-shrink-0 group"
             >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                fill
-                sizes="(max-width: 768px) 30vw, 103px"
-                className="rounded-xs transition-transform duration-200 group-hover:scale-105"
-              />
+              <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
               {/* 진행률 표시*/}
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-700">
                 <div className="h-1 bg-red-500" style={{ width: "70%" }} />

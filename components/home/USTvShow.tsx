@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectionTitle from "@/components/home/SectionTitle";
 import { fetchUSTVShows } from "@/lib/api/tdmb/tv";
 import type { TMDBTvShow } from "@/lib/api/types/tdmbs";
+import Thumbnail from '@/components/Thumbnail';
 
 export default function UsTvShow() {
   const [movies, setMovies] = useState<TMDBTvShow[]>([]);
@@ -35,13 +36,7 @@ export default function UsTvShow() {
               key={movie.id}
               className="relative w-[103px] h-[161px] flex-shrink-0 group"
             >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.name}
-                fill
-                sizes="(max-width: 768px) 30vw, 103px"
-                className="rounded-xs transition-transform duration-200 group-hover:scale-105"
-              />
+              <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
             </div>
           ))}
       </div>

@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { fetcher } from "@/lib/fetcher";
 import type { tmdbListResponse, tmdbTitle } from "@/types/tmdb";
-import Image from "next/image";
 import add from "@/public/icons/add.svg";
 import play from "@/public/icons/play.svg";
 import info from "@/public/icons/info.svg";
 
-const imgBase = process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE || "https://image.tmdb.org/t/p";
-const rotateTime = 20_000; // 20초 간격 (임의)
+const imgBase =
+    process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE || "https://image.tmdb.org/t/p";
+const rotateTime = 20_000; // 20초 간격
 const regionName = "Korea";
 
 // URL 만드는 함수
@@ -47,13 +49,13 @@ export default function Banner() {
         })();
     }, []);
 
-    // 20초마다 변경
+    // 20초마다 자동 변경
     useEffect(() => {
         if (!items.length) return;
         const start = () => {
             stop();
             timerRef.current = window.setInterval(() => {
-                setIndex((i) => (i + 1) % items.length); //index증가
+                setIndex((i) => (i + 1) % items.length);
             }, rotateTime);
         };
         const stop = () => {
@@ -64,23 +66,33 @@ export default function Banner() {
         };
 
         start();
-        return () => {
-            stop();
-        };
+        return () => stop();
     }, [items.length]);
 
     const current = items[index] ?? null;
     const title = current?.title ?? current?.name ?? "";
+    const backdropPath = current?.backdrop_path ?? current?.poster_path ?? "";
     const backdrop = useMemo(
-        () => buildImageUrl(current?.backdrop_path ?? current?.poster_path, "w1280"),
-        [current?.backdrop_path, current?.poster_path]
+        () => buildImageUrl(backdropPath, "w1280"),
+        [backdropPath]
     );
     const rank = Math.min(index + 1, 10);
 
+    // img 쿼리로 경로전달
+    const previewHref =
+        current && backdropPath
+            ? { pathname: `/title/${current.id}`, query: { img: backdropPath } }
+            : "#";
+
     return (
         <section className="rounded-xl overflow-hidden bg-black text-white">
-            <div className="relative h-[320px]">
-                {backdrop && (
+            {current && backdrop ? (
+                <Link
+                    href={previewHref}
+                    prefetch={false}
+                    aria-label={`${title} 미리보기로 이동`}
+                    className="relative block h-[320px] cursor-pointer"
+                >
                     <Image
                         key={backdrop}
                         src={backdrop}
@@ -90,10 +102,12 @@ export default function Banner() {
                         priority={index === 0}
                         className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
                     />
-                )}
-                {/* 이미지 그레이디언트 */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
-            </div>
+                    {/* 이미지 그라데이션 */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
+                </Link>
+            ) : (
+                <div className="relative h-[320px] bg-black/60" />
+            )}
 
             <div className="px-4 py-4">
                 <div className="mb-3">
@@ -102,11 +116,10 @@ export default function Banner() {
               <span className="text-[4.3px]">TOP</span>
               <span className="text-[6.8px]">10</span>
             </span>
-            <span className="opacity-90">
-              #{rank} in {regionName} Today
-            </span>
+            <span className="opacity-90">#{rank} in {regionName} Today</span>
           </span>
                 </div>
+
                 <div className="mx-auto flex w-[259px] h-[45px] justify-between">
                     {/* My List */}
                     <button className="flex flex-col w-[41px] h-[45px] items-center justify-center">

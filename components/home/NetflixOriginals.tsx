@@ -5,6 +5,7 @@ import Image from "next/image";
 import SectionTitle from "@/components/home/SectionTitle";
 import { fetchNetflixOriginals } from "@/lib/api/tdmb/combined";
 import type { TMDBMovie, TMDBTvShow } from "@/lib/api/types/tdmbs";
+import Thumbnail from "@/components/Thumbnail";
 
 type CombinedItem = TMDBMovie | TMDBTvShow;
 
@@ -37,13 +38,7 @@ export default function NetflixOriginals() {
               key={movie.id}
               className="relative w-[154px] h-[251px] flex-shrink-0 group"
             >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={("title" in movie ? movie.title : movie.name) ?? ""}
-                fill
-                sizes="(max-width: 768px) 30vw, 103px"
-                className="rounded-xs transition-transform duration-200 group-hover:scale-105"
-              />
+                <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
             </div>
           ))}
       </div>

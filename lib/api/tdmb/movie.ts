@@ -1,7 +1,22 @@
 import { BASE_URL, API_KEY, REVALIDATE_TIME } from "../../constants/tdmbs";
 import type { TMDBApiResponse, TMDBMovie } from "../types/tdmbs";
 
-//New Releases 부분
+//Banner
+export async function fetchBanner(
+  language = "en-US",
+  page = 1,
+  region = "US"
+): Promise<TMDBMovie[]> {
+  const res = await fetch(
+    `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=${language}&page=${page}&region=${region}`,
+    { next: { revalidate: REVALIDATE_TIME } }
+  );
+  if (!res.ok) throw new Error("Failed to fetch movies");
+  const data: TMDBApiResponse<TMDBMovie> = await res.json();
+  return data.results;
+}
+
+// New Releases 부분
 export async function fetchNewReleases(
   language = "en-US",
   page = 1,
@@ -69,21 +84,21 @@ export async function fetchAfricanMovies(
   return data.results;
 }
 
-//Top 10 in Nigiria 부분
-export async function fetchTop10Movies(
-  region = "NG", //기준 국가 정할 수 있음
-  language = "en-US",
-  page = 1
-) {
-  const res = await fetch(
-    `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&region=${region}&language=${language}&page=${page}`,
-    {
-      next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
+//Top 10 in Nigeria 부분
+  export async function fetchTop10Movies(
+    region = "NG", //기준 국가 정할 수 있음
+    language = "en-US",
+    page = 1
+  ) {
+    const res = await fetch(
+      `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&region=${region}&language=${language}&page=${page}`,
+      {
+        next: { revalidate: 3600 }, // ISR 캐싱: 1시간마다 새로 패치
+      }
+    );
+    if (!res.ok) {
+      throw new Error("Failed to fetch movies");
     }
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch movies");
-  }
 
   const data = await res.json();
   return data.results;

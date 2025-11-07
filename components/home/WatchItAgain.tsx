@@ -6,6 +6,7 @@ import Image from "next/image";
 import SectionTitle from "@/components/home/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";
 import type { TMDBMovie } from "@/lib/api/types/tdmbs";
+import Thumbnail from '@/components/Thumbnail';
 
 export default function WatchItAgain() {
   const [movies, setMovies] = useState<TMDBMovie[]>([]);
@@ -32,13 +33,7 @@ export default function WatchItAgain() {
               key={movie.id}
               className="relative w-[103px] h-[161px] flex-shrink-0 group"
             >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                fill
-                sizes="(max-width: 768px) 30vw, 103px"
-                className="rounded-xs transition-transform duration-200 group-hover:scale-105"
-              />
+              <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
             </div>
           ))}
       </div>
