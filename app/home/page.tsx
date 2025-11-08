@@ -1,5 +1,5 @@
-import Banner from '../../components/home/section/Banner';
-import HomeHeader from '../../components/home/HomeHeader';
+import Banner from '@/components/home/section/Banner';
+import HomeHeader from '@/components/home/HomeHeader';
 import Previews from '@/components/home/section/Previews';
 import KoreanMovies from '@/components/home/section/KoreanMovies';
 import ContinueWataching from '@/components/home/section/ContinueWatching';

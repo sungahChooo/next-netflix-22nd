@@ -6,4 +6,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = { images: { domains: ["image.tmdb.org"] } }
+
+
+// next.config.js
+module.exports = {
+  images: {
+    domains: ["image.tmdb.org"],
+  },
+};
