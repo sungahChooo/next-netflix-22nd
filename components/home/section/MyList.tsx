@@ -28,7 +28,7 @@ export default function MyList() {
     <section className="px-2 py-2 flex flex-col gap-2">
       <SectionTitle title="My List" />
 
-      <div className="flex scrollbar-hide gap-2  overflow-hidden bg-black scrollbar-custom cursor-pointer">
+      <div className="flex gap-2 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide cursor-pointer">
         {movies
           .filter((movie) => movie.poster_path)
           .map((movie) => (
