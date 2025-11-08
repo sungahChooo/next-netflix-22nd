@@ -26,9 +26,9 @@ export default function SearchResult({ movies, query, loaderRef, hasMore, loadin
       ) : movies.length === 0 ? (
         <div className="text-gray-400 mt-4 text-center">검색 결과가 없습니다. 😢</div>
       ) : (
-        movies.map((movie) => (
+        movies.map((movie, idx) => (
           <div
-            key={movie.id}
+            key={`${movie.id}-${idx}`}
             className=" cursor-pointer bg-[#424242] w-full h-[76px] flex items-center gap-3 pr-2 rounded-xl justify-between"
           >
             <div className="relative w-[146px] h-[76px] rounded-md overflow-hidden flex-shrink-0">
