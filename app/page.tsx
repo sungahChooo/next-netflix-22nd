@@ -4,7 +4,7 @@ import LottieLogo from '../components/LottieLogo';
 
 export default function Landing() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black">
+    <div className="flex flex col items-center justify-center text-white bg-black w-full min-h-screen">
       <LottieLogo />
     </div>
   );
