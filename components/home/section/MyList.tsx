@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { fetchMovieById } from "@/lib/api/tdmb/movie";
-import Image from "next/image";
-import SectionTitle from "@/components/home/SectionTitle";
+import { useEffect, useState } from 'react';
+import { fetchMovieById } from '@/lib/api/tdmb/movie';
+import Image from 'next/image';
+import SectionTitle from '@/components/home/section/SectionTitle';
 
 type Movie = {
   id: number;
@@ -18,9 +18,7 @@ export default function MyList() {
 
   useEffect(() => {
     async function loadMovies() {
-      const data = await Promise.all(
-        MOCK_WATCHING_IDS.map((id) => fetchMovieById(id))
-      );
+      const data = await Promise.all(MOCK_WATCHING_IDS.map((id) => fetchMovieById(id)));
       setMovies(data);
     }
     loadMovies();
@@ -30,14 +28,11 @@ export default function MyList() {
     <section className="px-2 py-2 flex flex-col gap-2">
       <SectionTitle title="My List" />
 
-      <div className="flex scrollbar-hide gap-2  overflow-hidden bg-black scrollbar-custom">
+      <div className="flex scrollbar-hide gap-2  overflow-hidden bg-black scrollbar-custom cursor-pointer">
         {movies
           .filter((movie) => movie.poster_path)
           .map((movie) => (
-            <div
-              key={movie.id}
-              className="relative w-[103px] h-[161px] flex-shrink-0 group"
-            >
+            <div key={movie.id} className="relative w-[103px] h-[161px] flex-shrink-0 group">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}

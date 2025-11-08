@@ -2,30 +2,30 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/home/SectionTitle";
-import { fetchUSTVShows } from "@/lib/api/tdmb/tv";
-import type { TMDBTvShow } from "@/lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/section/SectionTitle";
+import { fetchPopularMovies } from "@/lib/api/tdmb/movie";
+import type { TMDBMovie } from "@/lib/api/types/tdmbs";
 import Thumbnail from '@/components/Thumbnail';
 
-export default function UsTvShow() {
-  const [movies, setMovies] = useState<TMDBTvShow[]>([]);
+export default function Popular() {
+  const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   useEffect(() => {
-    const loadMovies = async () => {
+    const getPopularMovies = async () => {
       try {
-        const movieData = await fetchUSTVShows();
+        const movieData = await fetchPopularMovies();
         setMovies(movieData);
       } catch (error) {
         console.error("Failed to fetch popular movies:", error);
       }
     };
 
-    loadMovies();
+    getPopularMovies();
   }, []);
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="US TV Shows" />
+      <SectionTitle title="Popular on Netflix" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies

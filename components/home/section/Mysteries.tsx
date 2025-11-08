@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import SectionTitle from "@/components/home/SectionTitle";
-import { fetchNewReleases } from "@/lib/api/tdmb/movie";
-import type { TMDBMovie } from "@/lib/api/types/tdmbs";
+import SectionTitle from "@/components/home/section/SectionTitle";
+import { fetchMysteryTv } from "@/lib/api/tdmb/tv";
+import type { TMDBTvShow } from "@/lib/api/types/tdmbs";
 import Thumbnail from '@/components/Thumbnail';
 
-export default function NewReleases() {
-  const [movies, setMovies] = useState<TMDBMovie[]>([]);
+export default function TvThrillerMysteries() {
+  const [movies, setMovies] = useState<TMDBTvShow[]>([]);
 
   useEffect(() => {
     const loadMovies = async () => {
       try {
-        const movieData = await fetchNewReleases();
+        const movieData = await fetchMysteryTv();
         setMovies(movieData);
       } catch (error) {
         console.error("Failed to fetch popular movies:", error);
@@ -25,7 +25,7 @@ export default function NewReleases() {
 
   return (
     <section className="px-2 py-1 flex flex-col gap-2">
-      <SectionTitle title="New Releases" />
+      <SectionTitle title="TV Thrillers & Mysteries" />
 
       <div className="flex scrollbar-hide gap-2 overflow-hidden bg-black scrollbar-custom">
         {movies

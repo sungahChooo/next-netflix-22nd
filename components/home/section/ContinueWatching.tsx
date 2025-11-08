@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchMovieById } from "../../lib/api/tdmb/movie";
+import { fetchMovieById } from "@/lib/api/tdmb/movie";
 import Image from "next/image";
-import SectionTitle from "@/components/home/SectionTitle";
+import SectionTitle from "@/components/home/section/SectionTitle";
 import { watchHistory } from "@/data/watchHistory";
-import type { TMDBMovie } from "../../lib/api/types/tdmbs";
+import type { TMDBMovie } from "@/lib/api/types/tdmbs";
 import Thumbnail from '@/components/Thumbnail';
 
 // 사용자 이름 가져오기 (더미 데이터 기준)
