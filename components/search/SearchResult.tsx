@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { TMDBMovie } from '@/lib/api/types/tdmbs';
 import { RefObject } from 'react';
 import MovieSkeleton from '@/components/search/SearchSkeleton';
+import Thumbnail from '@/components/Thumbnail';
 
 interface SearchResultProps {
   movies: TMDBMovie[];
@@ -31,12 +32,7 @@ export default function SearchResult({ movies, query, loaderRef, hasMore, loadin
             className=" cursor-pointer bg-[#424242] w-full h-[76px] flex items-center gap-3 pr-2 rounded-xl justify-between"
           >
             <div className="relative w-[146px] h-[76px] rounded-md overflow-hidden flex-shrink-0">
-              <Image
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={movie.title}
-                fill
-                className="rounded-md object-cover"
-              />
+              <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
             </div>
             <span className="font-semibold">{movie.title}</span>
             <Image
