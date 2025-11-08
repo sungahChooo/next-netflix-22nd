@@ -26,13 +26,12 @@ export default function Search() {
   return (
     <div className="flex flex-col min-h-screen bg-black w-[375px]">
       {/* 상단 고정 검색창 + Top search */}
-      <div className="fixed top-0 w-[375px] justify-center z-10 bg-black flex flex-col border-b border-gray-800">
+      <div className="fixed pt-11 w-[375px] justify-center z-10 bg-black flex flex-col">
         <SearchSection query={query} onChange={setQuery} />
-        <span className="text-white px-4 py-2 font-bold text-2xl bg-transparent">Top search</span>
       </div>
 
       {/* 검색결과 목록 */}
-      <div className="flex-1 overflow-y-auto px-4 pb-8 mt-[130px]">
+      <div className="flex-1 overflow-y-auto px-4 pb-8 mt-[120px]">
         {/* mt-[104px] = fixed 헤더(SearchSection + Top search) 높이만큼 */}
         <SearchResult movies={movies} query={query} />
       </div>
