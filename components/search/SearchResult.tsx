@@ -35,12 +35,7 @@ export default function SearchResult({ movies, query, loaderRef, hasMore, loadin
               <Thumbnail item={movie} imgSize="w500" className="absolute inset-0" />
             </div>
             <span className="font-semibold">{movie.title}</span>
-            <Image
-              src="/icons/playSearch.svg"
-              alt="Play Search Icon"
-              width={28} // 필수
-              height={84} // 필수
-            />
+            <Image src="/icons/playSearch.svg" alt="Play Search Icon" width={28} height={28} />
           </div>
         ))
       )}

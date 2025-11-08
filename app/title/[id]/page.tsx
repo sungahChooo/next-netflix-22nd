@@ -38,7 +38,7 @@ export default function TitlePreviewPage() {
      text-white "
     >
       {/* 이미지 */}
-      <div className="relative w-full h-103 rounded-xl overflow-hidden shadow-2xl ">
+      <div className="relative w-full h-103 overflow-hidden shadow-2xl ">
         <Image src={src} alt="" fill sizes="420px" className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/80" />
       </div>
