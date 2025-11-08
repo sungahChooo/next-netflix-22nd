@@ -11,28 +11,35 @@ export default function Search() {
 
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   const loaderRef = useRef<HTMLDivElement>(null);
 
   const loadMovies = async (isNewSearch = false) => {
+    setLoading(true);
     const nextPage = isNewSearch ? 1 : page;
     let data: TMDBMovie[] = [];
 
-    if (!query) {
-      data = await fetchPopularMovies('en-US', nextPage);
-    } else {
-      data = await fetchSearchMovie('ko-KR', query, nextPage);
-    }
+    try {
+      if (!query) {
+        data = await fetchPopularMovies('en-US', nextPage);
+      } else {
+        data = await fetchSearchMovie('ko-KR', query, nextPage);
+      }
 
-    if (isNewSearch) {
-      setMovies(data);
-      setPage(2);
-    } else {
-      setMovies((prev) => [...prev, ...data]);
-      setPage((prev) => prev + 1);
-    }
+      if (isNewSearch) {
+        setMovies(data);
+        setPage(2);
+      } else {
+        setMovies((prev) => [...prev, ...data]);
+        setPage((prev) => prev + 1);
+      }
 
-    setHasMore(data.length > 0);
+      setHasMore(data.length > 0);
+    } catch (error) {
+      console.log('error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // 검색어 변경 시 초기화
@@ -56,7 +63,7 @@ export default function Search() {
     return () => {
       if (loaderRef.current) observer.unobserve(loaderRef.current);
     };
-  }, [loaderRef, hasMore, query, page]);
+  }, [loading, loaderRef, hasMore, query, page]);
 
   return (
     <div className="flex flex-col min-h-screen bg-black w-[375px]">
@@ -68,7 +75,7 @@ export default function Search() {
       {/* 검색결과 목록 */}
       <div className="flex-1 overflow-y-auto px-4 pb-8 mt-[120px]">
         {/* mt-[104px] = fixed 헤더(SearchSection + Top search) 높이만큼 */}
-        <SearchResult movies={movies} query={query} loaderRef={loaderRef} hasMore={hasMore} />
+        <SearchResult movies={movies} query={query} loaderRef={loaderRef} hasMore={hasMore} loading={loading} />
       </div>
     </div>
   );
