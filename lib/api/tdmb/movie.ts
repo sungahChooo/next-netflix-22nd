@@ -2,6 +2,32 @@ import { BASE_URL, API_KEY } from '@/lib/constants/tdmbs';
 import type { TMDBApiResponse, TMDBMovie, TMDBTvShow } from '@/lib/api/types/tdmbs';
 import axios from 'axios';
 
+//search page 영화  부분
+export async function fetchSearchMovie(
+  language = 'ko-KR',
+  query = '',
+  page = 1,
+  include_adult = false,
+): Promise<TMDBMovie[]> {
+  try {
+    const res = await axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/search/movie`, {
+      params: {
+        api_key: API_KEY,
+        language,
+        query,
+        page,
+        include_adult,
+      },
+    });
+    const moviesWithImage = res.data.results.filter((movie) => movie.poster_path !== null);
+    console.log('search movie:', res.data.results);
+    return moviesWithImage;
+  } catch (error) {
+    console.error('❌ fetch search movie error:', error);
+    return [];
+  }
+}
+
 //New Releases 부분
 export async function fetchNewReleases(language = 'en-US', page = 1, region = 'US'): Promise<TMDBMovie[]> {
   try {
