@@ -1,17 +1,16 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["image.tmdb.org"],
+    domains: ['image.tmdb.org'],
   },
 };
 
-module.exports = { images: { domains: ["image.tmdb.org"] } }
-
+module.exports = { images: { domains: ['image.tmdb.org'] } };
 
 // next.config.js
 module.exports = {
   images: {
-    domains: ["image.tmdb.org"],
+    domains: ['cdn.automedi.co.kr', 'image.tmdb.org'],
   },
 };

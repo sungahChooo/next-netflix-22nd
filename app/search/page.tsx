@@ -27,10 +27,13 @@ export default function Search() {
       }
 
       if (isNewSearch) {
-        setMovies(data);
+        setMovies(data.slice(0, 10)); // 새로운 검색 시 처음 10개만 보여주기
         setPage(2);
       } else {
-        setMovies((prev) => [...prev, ...data]);
+        setMovies((prev) => {
+          const merged = [...prev, ...data.slice(0, 10)]; // 다음 페이지에서 10개만 추가
+          return Array.from(new Map(merged.map((m) => [m.id, m])).values());
+        });
         setPage((prev) => prev + 1);
       }
 
@@ -47,23 +50,23 @@ export default function Search() {
     loadMovies(true);
   }, [query]);
 
-  // 무한 스크롤 Intersection Observer
   useEffect(() => {
+    if (!loaderRef.current) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loading) {
+        const entry = entries[0];
+        if (entry.isIntersecting && hasMore && !loading) {
           loadMovies();
         }
       },
-      { root: null, rootMargin: '0px', threshold: 1.0 },
+      { root: null, rootMargin: '200px', threshold: 0.1 },
     );
 
-    if (loaderRef.current) observer.observe(loaderRef.current);
+    observer.observe(loaderRef.current);
 
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [loading, loaderRef, hasMore, query, page]);
+    return () => observer.disconnect();
+  }, [hasMore, loading, query]);
 
   return (
     <div className="flex flex-col min-h-screen bg-black w-[375px]">
