@@ -8,6 +8,7 @@ export async function fetchSearchMovie(
   query = '',
   page = 1,
   include_adult = false,
+  limit = 10,
 ): Promise<TMDBMovie[]> {
   try {
     const res = await axios.get<TMDBApiResponse<TMDBMovie>>(`${BASE_URL}/search/movie`, {
@@ -17,6 +18,7 @@ export async function fetchSearchMovie(
         query,
         page,
         include_adult,
+        limit,
       },
     });
     const moviesWithImage = res.data.results.filter((movie) => movie.poster_path !== null);
