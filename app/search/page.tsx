@@ -69,7 +69,7 @@ export default function Search() {
   }, [hasMore, loading, query]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black w-[375px]">
+    <>
       {/* 상단 고정 검색창 + Top search */}
       <div className="fixed pt-11 w-[375px] justify-center z-10 bg-black flex flex-col">
         <SearchSection query={query} onChange={setQuery} />
@@ -80,6 +80,6 @@ export default function Search() {
         {/* mt-[104px] = fixed 헤더(SearchSection + Top search) 높이만큼 */}
         <SearchResult movies={movies} query={query} loaderRef={loaderRef} hasMore={hasMore} loading={loading} />
       </div>
-    </div>
+    </>
   );
 }
