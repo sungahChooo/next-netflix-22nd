@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function Search() {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   const [page, setPage] = useState(1);
@@ -45,10 +46,19 @@ export default function Search() {
     }
   };
 
-  // 검색어 변경 시 초기화
+  // query가 바뀔 때 debounce 적용
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300); // 300ms 대기
+
+    return () => clearTimeout(timer); // 이전 타이머 제거
+  }, [query]);
+
+  //실제 검색 실행
   useEffect(() => {
     loadMovies(true);
-  }, [query]);
+  }, [debouncedQuery]);
 
   useEffect(() => {
     if (!loaderRef.current) return;
@@ -69,17 +79,17 @@ export default function Search() {
   }, [hasMore, loading, query]);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black w-[375px]">
+    <>
       {/* 상단 고정 검색창 + Top search */}
       <div className="fixed pt-11 w-[375px] justify-center z-10 bg-black flex flex-col">
         <SearchSection query={query} onChange={setQuery} />
       </div>
 
       {/* 검색결과 목록 */}
-      <div className="flex-1 overflow-y-auto px-4 pb-8 mt-[120px]">
+      <div className="flex-1 overflow-y-auto px-4 pb-8 pt-[104px]">
         {/* mt-[104px] = fixed 헤더(SearchSection + Top search) 높이만큼 */}
         <SearchResult movies={movies} query={query} loaderRef={loaderRef} hasMore={hasMore} loading={loading} />
       </div>
-    </div>
+    </>
   );
 }

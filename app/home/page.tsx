@@ -15,27 +15,25 @@ import UsTvShow from '@/components/home/section/USTvShow';
 import WatchItAgain from '@/components/home/section/WatchItAgain';
 export default async function Home() {
   return (
-    <div className="min-h-screen bg-black w-[375px]">
-      <div className="w-full bg-transparent relative flex flex-col overflow-hidden mb-20">
-        {/* Header를 배너 위에 겹치기 */}
-        <div className="absolute top-0 left-0 w-full z-10 text-white">
-          <HomeHeader />
-        </div>
-        <Banner />
-        <Previews />
-        <ContinueWataching />
-        <Popular />
-        <TrendingNow />
-        <Top10 />
-        <MyList />
-        <KoreanMovies />
-        <Hollywood />
-        <NetflixOriginals />
-        <WatchItAgain />
-        <NewReleases />
-        <Mysteries />
-        <UsTvShow />
+    <div className="w-full bg-transparent relative flex flex-col overflow-hidden mb-20">
+      {/* Header를 배너 위에 겹치기 */}
+      <div className="absolute top-0 left-0 w-full z-10 text-white">
+        <HomeHeader />
       </div>
+      <Banner />
+      <Previews />
+      <ContinueWataching />
+      <Popular />
+      <TrendingNow />
+      <Top10 />
+      <MyList />
+      <KoreanMovies />
+      <Hollywood />
+      <NetflixOriginals />
+      <WatchItAgain />
+      <NewReleases />
+      <Mysteries />
+      <UsTvShow />
     </div>
   );
 }

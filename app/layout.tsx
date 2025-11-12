@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -33,9 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center w-full min-h-screen bg-white`}
       >
-        {children}
-        <NavbarWrapper />
-        <IndicatorBar />
+        <div className="relative w-[375px] min-h-screen bg-black mx-auto">
+          <main className="pb-[96px]">{children}</main> {/* 하단 UI 높이만큼 패딩 */}
+          <div className="absolute bottom-0 left-0 w-full">
+            <IndicatorBar />
+            <NavbarWrapper />
+          </div>
+        </div>
       </body>
     </html>
   );

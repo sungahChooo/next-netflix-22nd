@@ -16,7 +16,7 @@ export default function Navbar() {
     `flex flex-col items-center text-[8px] ${pathname === path ? 'text-white' : 'text-[#8C8787]'}`;
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 flex w-[375px] h-[48px] bg-black justify-between px-4 items-center">
+    <div className="fixed bottom-8 flex w-[375px] h-[48px] bg-black justify-between px-4 items-center">
       <Link href="/home" className={getLinkClass('/home')}>
         <HomeIcon className="w-[24px] h-[24px]" />
         <span>Home</span>
