@@ -25,7 +25,7 @@ export default function SearchResult({
     <section className="bg-gray text-white flex flex-col gap-2">
       <span className="font-bold text-2xl pl-2">{state}</span>
       {loading ? (
-        <MovieSkeleton count={6} />
+        <MovieSkeleton count={10} />
       ) : (
         movies.map((m) => {
           const path = m.poster_path || m.backdrop_path || '';

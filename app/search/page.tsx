@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function Search() {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
   const [movies, setMovies] = useState<TMDBMovie[]>([]);
 
   const [page, setPage] = useState(1);
@@ -45,10 +46,19 @@ export default function Search() {
     }
   };
 
-  // 검색어 변경 시 초기화
+  // query가 바뀔 때 debounce 적용
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300); // 300ms 대기
+
+    return () => clearTimeout(timer); // 이전 타이머 제거
+  }, [query]);
+
+  //실제 검색 실행
   useEffect(() => {
     loadMovies(true);
-  }, [query]);
+  }, [debouncedQuery]);
 
   useEffect(() => {
     if (!loaderRef.current) return;

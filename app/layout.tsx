@@ -32,11 +32,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center justify-center w-full min-h-screen bg-white`}
       >
-        <div className="min-h-screen bg-black w-[375px]">
-          {children}
-          <NavbarWrapper />
-          <IndicatorBar />
-        </div>
+        <main className="min-h-screen bg-black w-[375px]">{children}</main>
+        <NavbarWrapper />
+        <IndicatorBar />
       </body>
     </html>
   );
