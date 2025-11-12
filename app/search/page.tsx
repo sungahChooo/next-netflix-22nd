@@ -86,7 +86,7 @@ export default function Search() {
       </div>
 
       {/* 검색결과 목록 */}
-      <div className="flex-1 overflow-y-auto px-4 pb-8 mt-[120px]">
+      <div className="flex-1 overflow-y-auto px-4 pb-8 pt-[104px]">
         {/* mt-[104px] = fixed 헤더(SearchSection + Top search) 높이만큼 */}
         <SearchResult movies={movies} query={query} loaderRef={loaderRef} hasMore={hasMore} loading={loading} />
       </div>
